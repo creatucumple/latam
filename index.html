@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De la Imaginación a la Realidad</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Swiper.js for Carousels -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FFFBEB; /* Pale Yellow */
+            color: #4A5568;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+       
+        .section-title {
+            @apply text-4xl md:text-5xl font-bold text-gray-800 mb-12 text-center;
+        }
+        
+        /* Animation Classes (to be toggled by JS) */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Carousel Styles */
+        .swiper-container {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 270px;
+            height: 480px;
+            transition: transform 0.3s ease;
+        }
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .swiper-slide-active {
+             transform: scale(1.1);
+        }
+
+        /* Premium Package Border */
+        .premium-pack {
+            position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box; /* Important */
+        }
+        .premium-pack::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -2px; /* Same as border width */
+            border-radius: inherit; /* Inherit border-radius */
+            background: linear-gradient(90deg, #FBBF24, #D97706, #FBBF24);
+            animation: glow 3s linear infinite;
+        }
+
+        @keyframes glow {
+            0% { filter: blur(3px); opacity: 0.7; }
+            50% { filter: blur(6px); opacity: 1; }
+            100% { filter: blur(3px); opacity: 0.7; }
+        }
+
+        .experience-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .experience-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.15);
+        }
+
+        /* New Animation Classes for staggered entry */
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .story-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .story-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Particle Background */
+        .particle-section {
+            position: relative;
+            background-color: #1A202C;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            background: #FBBF24;
+            border-radius: 50%;
+            opacity: 0;
+            animation: rise 10s infinite linear;
+        }
+        @keyframes rise {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            10%, 90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+        
+    </style>
+</head>
+<body class="bg-[#FFFBEB]">
+
+    <!-- Sección 1: Hero -->
+    <section id="hero" class="w-full bg-[#FFFBEB] pt-5 pb-10">
+         <div class="max-w-7xl mx-auto px-6">
+            <img src="https://images.weserv.nl/?url=i.ibb.co/gLWd2nTP/gemini-2-5-flash-image-preview-nano-banana-A-high-quality-ph-1.png&w=1200&q=80&output=webp" alt="La imaginación es el alma de la fiesta" class="w-full h-auto object-cover rounded-2xl shadow-xl" loading="eager" decoding="async" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/FFFBEB/4A5568?text=Imagen+principal';">
+         </div>
+    </section>
+
+    <!-- Sección 2: La Transformación - Vicente -->
+    <section id="vicente" class="py-20 px-6 md:px-12 bg-amber-100">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-center text-4xl md:text-6xl font-bold text-gray-800 mb-16 anim-target fade-in-up">De un Trazo de Lápiz... a un Héroe Inmortal.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 items-start text-center">
+                <!-- Card 1: El Dibujo -->
+                <div class="story-card bg-white p-6 rounded-2xl shadow-lg anim-target fade-in-up">
+                    <img src="https://images.weserv.nl/?url=i.ibb.co/t7xwCV1/Vicen-con-su-dibujo.png&w=800&q=80&output=webp" alt="Dibujo original de Vicente" class="w-full h-80 object-cover mx-auto rounded-xl" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://placehold.co/400x400/FFFBEB/4A5568?text=Imagen+no+disponible';">
+                    <p class="mt-4 text-lg font-medium">Todo comienza con una idea...</p>
+                </div>
+                <!-- Card 2: El Héroe -->
+                <div class="story-card bg-white p-6 rounded-2xl shadow-lg anim-target fade-in-up" style="transition-delay: 200ms;">
+                    <img src="https://images.weserv.nl/?url=i.ibb.co/Mk6GkfCj/3er-fotograma.png&w=800&q=80&output=webp" alt="Vicente El Rayo versión épica" class="w-full h-80 object-cover mx-auto rounded-xl" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://placehold.co/400x400/FFFBEB/4A5568?text=Imagen+no+disponible';">
+                    <p class="mt-4 text-lg font-medium">...la convertimos en una leyenda...</p>
+                </div>
+                <!-- Card 3: El Banner -->
+                <div class="story-card bg-white p-6 rounded-2xl shadow-lg anim-target fade-in-up" style="transition-delay: 400ms;">
+                    <img src="https://images.weserv.nl/?url=i.ibb.co/hvzfBcT/Cumplea-os.png&w=800&q=80&output=webp" alt="Banner de cumpleaños de Vicente" class="w-full h-80 object-cover mx-auto rounded-xl" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://placehold.co/400x400/FFFBEB/4A5568?text=Imagen+no+disponible';">
+                    <p class="mt-4 text-lg font-medium">...y la hacemos la estrella de su día más especial.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 3: La Creación - Gaia -->
+    <section id="gaia" class="py-20 px-6 md:px-12 bg-amber-100">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-center text-4xl md:text-6xl font-bold text-gray-800 mb-16 anim-target fade-in-up">De un Mundo de Colores... a una Reina Inolvidable.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 items-start text-center">
+                <!-- Card 1: El Dibujo -->
+                <div class="story-card bg-white p-6 rounded-2xl shadow-lg anim-target fade-in-up">
+                    <img src="https://images.weserv.nl/?url=i.ibb.co/gZw4NPJK/Gaia-con-su-dibujo.png&w=800&q=80&output=webp" alt="Dibujo original de Gaia" class="w-full h-80 object-cover mx-auto rounded-xl" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://placehold.co/400x400/FFFBEB/4A5568?text=Imagen+no+disponible';">
+                    <p class="mt-4 text-lg font-medium">Cada dibujo guarda un sueño...</p>
+                </div>
+                <!-- Card 2: La Reina -->
+                <div class="story-card bg-white p-6 rounded-2xl shadow-lg anim-target fade-in-up" style="transition-delay: 200ms;">
+                    <img src="https://images.weserv.nl/?url=i.ibb.co/6xPrwsf/2do-fotograma.png&w=800&q=80&output=webp" alt="Gaia, la Reina de las Flores" class="w-full h-80 object-cover mx-auto rounded-xl" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://placehold.co/400x400/FFFBEB/4A5568?text=Imagen+no+disponible';">
+                    <p class="mt-4 text-lg font-medium">...nosotros le damos vida y magia...</p>
+                </div>
+                <!-- Card 3: La Bolsita -->
+                <div class="story-card bg-white p-6 rounded-2xl shadow-lg anim-target fade-in-up" style="transition-delay: 400ms;">
+                    <img src="https://images.weserv.nl/?url=i.ibb.co/4R3ShBSP/2-bolsita-de-cumplea-os.png&w=800&q=80&output=webp" alt="Bolsita de cumpleaños de Gaia" class="w-full h-80 object-cover mx-auto rounded-xl" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://placehold.co/400x400/FFFBEB/4A5568?text=Imagen+no+disponible';">
+                    <p class="mt-4 text-lg font-medium">...para crear recuerdos que durarán para siempre.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 4: Un Universo de Posibilidades -->
+    <section id="posibilidades" class="py-20 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-center text-4xl md:text-6xl font-bold text-gray-800 mb-16 anim-target fade-in-up">El Sueño de Cada Niño Tiene su Propio Estilo.</h2>
+            
+            <!-- Carrusel 1: Gaia -->
+            <div class="mb-12 anim-target fade-in-up">
+                <h3 class="text-2xl md:text-3xl font-bold text-gray-700 text-center mb-4">El Mundo de Gaia</h3>
+                <div class="swiper-container swiper-gaia">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/ymjcSzJB/1-3-D-CGI-Fotorrealista-pico-Estilo-Pixar-Disney-Illumination-Frozen.png&w=540&q=75&output=webp" alt="Estilo Pixar"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/kg6rjJtk/2-2-D-Digital-Vectorial-Estilo-Cal-Arts-Moderno-de-TV-Bluey-png.png&w=540&q=75&output=webp" alt="Estilo Bluey"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/XrBp7NFj/3-3-D-CGI-Simplificado-Estilo-Preescolar-cocomeleon.png&w=540&q=75&output=webp" alt="Estilo Cocomelon"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/ZzDtkpgk/4-Anime-Shonen.png&w=540&q=75&output=webp" alt="Estilo Anime Shonen"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/fGy7yV48/5-2-D-Digital-Simplificado-Estilo-Flash-Comedia-de-TV-jovenes-titanes.png&w=540&q=75&output=webp" alt="Estilo Jóvenes Titanes"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/CsSyF60Y/6-3-D-H-brido-Estilizado-Estilo-Spider-Verse.png&w=540&q=75&output=webp" alt="Estilo Spider-Verse"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/0y4CfhGn/7-Anime-Kodomomuke.png&w=540&q=75&output=webp" alt="Estilo Anime Kodomomuke"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/4gfFXb82/8-Stop-Motion-Estilo-Laika-Aardman.png&w=540&q=75&output=webp" alt="Estilo Stop Motion"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/W4TGkVtx/9-Anime-Shoujo-Slice-of-Life.png&w=540&q=75&output=webp" alt="Estilo Anime Shoujo"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/B5Wm6Jwc/10-Figura-de-accion.png&w=540&q=75&output=webp" alt="Estilo Figura de Acción"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carrusel 2: Vicente -->
+            <div class="anim-target fade-in-up">
+                <h3 class="text-2xl md:text-3xl font-bold text-gray-700 text-center mb-4">El Universo de Vicente</h3>
+                <div class="swiper-container swiper-vicente">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/wrPJqVdH/1-3-D-CGI-Fotorrealista-pico-frozen-mario.png&w=540&q=75&output=webp" alt="Estilo 3D Fotorrealista"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/8hm6SZj/2-2-D-Digital-Vectoria-Bluey.png&w=540&q=75&output=webp" alt="Estilo 2D Vectorial"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/d0hvpjsd/3-3-D-CGI-Simplificado-cocomelon-paw-patro.png&w=540&q=75&output=webp" alt="Estilo 3D Simplificado"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/2YKN6d9c/4-Anime-Shonen-Dragon-Ball.png&w=540&q=75&output=webp" alt="Estilo Anime Shonen Dragon Ball"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/My86ZBwh/5-2-D-Digital-Simplificado-Estilo-Flash-Comedia-de-TV-Jovenes-titanes.png&w=540&q=75&output=webp" alt="Estilo 2D Simplificado Flash"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/HDWCmYf6/6-3-D-H-brido-Estilizado-Estilo-Spider-Verse.png&w=540&q=75&output=webp" alt="Estilo 3D Híbrido Spider-Verse"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/39NzMg9m/7-Anime-Kodomomuke-poquemon.png&w=540&q=75&output=webp" alt="Estilo Anime Kodomomuke Pokemon"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/6SHBvVk/8-Stop-Motion-Estilo-Laika-Aardman.png&w=540&q=75&output=webp" alt="Estilo Stop Motion Laika"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/vCvyKYK7/9-Estilo-paren-la-mano.png&w=540&q=75&output=webp" alt="Estilo Cartoon Network"></div>
+                        <div class="swiper-slide"><img src="https://images.weserv.nl/?url=i.ibb.co/dh5396Y/10-Juguete.png&w=540&q=75&output=webp" alt="Estilo Juguete"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 5: Experiencias Mágicas -->
+    <section id="experiencias" class="py-20 px-6 md:px-12 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-center text-4xl md:text-6xl font-bold text-gray-800 mb-16 anim-target fade-in-up">Elige la Magia Perfecta para su Día</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                
+                <!-- Card 1: Pack Creación Mágica -->
+                <div class="experience-card bg-white p-8 rounded-2xl shadow-lg flex flex-col h-full">
+                    <div class="text-center mb-6">
+                        <svg class="h-16 w-16 mx-auto text-[#D4A017]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                        </svg>
+                        <h3 class="text-3xl font-bold text-[#D4A017] mt-4">Pack Creación Mágica</h3>
+                        <p class="mt-2 text-gray-600 italic">La base de una celebración inolvidable.</p>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="mb-6 text-gray-700">Tomamos el dibujo de su creador y lo convertimos en el alma de la fiesta.</p>
+                        <ul class="space-y-3 text-left text-gray-600">
+                            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span><strong>Creación del Personaje Profesional</strong> (2 versiones en alta resolución).</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span><strong>Kit de Fiesta Digital Completo:</strong></li>
+                        </ul>
+                        <ul class="space-y-2 text-left text-gray-500 text-sm pl-8 mt-2">
+                            <li>- Invitación para WhatsApp.</li>
+                            <li>- Banner de Bienvenida.</li>
+                            <li>- Diseño para Topper de Torta.</li>
+                            <li>- Plancha de Círculos Multiuso (Stickers).</li>
+                            <li>- Etiquetas para Souvenirs.</li>
+                            <li>- Tarjeta de Agradecimiento.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2: Pack Sueño Animado -->
+                <div class="experience-card bg-white p-8 rounded-2xl shadow-lg flex flex-col h-full relative">
+                    <div class="absolute top-0 right-0 -mt-3 -mr-3">
+                         <span class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow-md">El Más Popular</span>
+                    </div>
+                    <div class="text-center mb-6">
+                         <svg class="h-16 w-16 mx-auto text-[#D4A017]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                        </svg>
+                        <h3 class="text-3xl font-bold text-[#D4A017] mt-4">Pack Sueño Animado</h3>
+                        <p class="mt-2 text-gray-600 italic">La magia que trasciende la decoración.</p>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="mb-6 text-gray-700">Le damos vida y movimiento al sueño para crear un recuerdo que será el corazón del evento.</p>
+                         <ul class="space-y-3 text-left text-gray-600">
+                            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span><strong>TODO lo incluido en el Pack Creación Mágica.</strong></li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">+</span><strong>Libro Digital para Colorear</strong> (PDF listo para imprimir).</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">+</span><strong>La Joya del Pack: Video Animado de 1 Minuto.</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 3: Pack Legado Inmortal -->
+                <div class="experience-card p-8 rounded-2xl shadow-2xl flex flex-col h-full premium-pack bg-[#1A2E40] text-white">
+                     <div class="text-center mb-6">
+                        <svg class="h-16 w-16 mx-auto text-[#D4A017]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5" />
+                        </svg>
+                        <h3 class="text-3xl font-bold text-[#D4A017] mt-4">Pack Legado Inmortal</h3>
+                        <p class="mt-2 text-gray-300 italic">La experiencia definitiva.</p>
+                     </div>
+                     <div class="flex-grow">
+                        <p class="mb-6">No creamos un personaje para una fiesta, inmortalizamos una leyenda familiar en una cápsula del tiempo digital.</p>
+                        <ul class="space-y-4 text-left">
+                            <li><span class="text-green-400 mr-2">✓</span><strong>TODO lo incluido en el Pack Sueño Animado.</strong></li>
+                            <li>
+                                <h4 class="font-bold text-[#D4A017] uppercase tracking-wider text-sm">Un Universo Visual Expandido</h4>
+                                <ul class="text-sm pl-6 mt-1 space-y-1 text-gray-300">
+                                    <li>- Galería de Personaje (10 imágenes extra).</li>
+                                    <li>- Kit para Merchandising (tazas, remeras, etc).</li>
+                                </ul>
+                            </li>
+                             <li>
+                                <h4 class="font-bold text-[#D4A017] uppercase tracking-wider text-sm">La Primera Gran Aventura</h4>
+                                <ul class="text-sm pl-6 mt-1 space-y-1 text-gray-300">
+                                    <li>- Cuento Ilustrado Digital Profesional.</li>
+                                    <li>- Cortometraje de 2 min con narrador.</li>
+                                </ul>
+                            </li>
+                             <li>
+                                <h4 class="font-bold text-[#D4A017] uppercase tracking-wider text-sm">El Tesoro Más Preciado</h4>
+                                <ul class="text-sm pl-6 mt-1 space-y-1 text-gray-300">
+                                    <li>- La Cápsula del Tiempo Digital (dibujo original, video-mensaje y certificado).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 6: El Impacto Emocional -->
+    <section id="emocion" class="py-24 px-6 md:px-12 particle-section text-white text-center">
+        <div id="particle-container" class="absolute inset-0"></div>
+        <div class="relative max-w-4xl mx-auto space-y-6">
+            <p class="text-2xl md:text-3xl anim-target fade-in-up">
+                Imagina la cara de tu hijo al ver a su propio personaje, nacido de <span class="font-semibold text-yellow-400 font-['Dancing_Script'] text-4xl">su mente</span> y <span class="font-semibold text-yellow-400 font-['Dancing_Script'] text-4xl">su corazón</span>, como el verdadero protagonista.
+            </p>
+            <p class="text-2xl md:text-3xl anim-target fade-in-up" style="transition-delay: 200ms;">
+                No es reemplazar a los héroes que admira. Es darle el poder de convertirse en el <span class="font-semibold text-yellow-400 font-['Dancing_Script'] text-4xl">suyo propio</span>.
+            </p>
+            <p class="text-2xl md:text-3xl anim-target fade-in-up" style="transition-delay: 400ms;">
+                Es una celebración de su <span class="font-semibold text-yellow-400 font-['Dancing_Script'] text-4xl">creatividad</span>, un impulso a su <span class="font-semibold text-yellow-400 font-['Dancing_Script'] text-4xl">confianza</span> y el regalo de un recuerdo <span class="font-semibold text-yellow-400 font-['Dancing_Script'] text-4xl">único</span> e <span class="font-semibold text-yellow-400 font-['Dancing_Script'] text-4xl">imborrable</span>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Sección 7: Llamada a la Acción -->
+    <footer class="py-20 px-6 md:px-12 text-center">
+        <div class="max-w-3xl mx-auto anim-target fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">¿Listo/a para darle vida a su sueño?</h2>
+            <p class="text-lg md:text-xl text-gray-600">Consulta con tu organizador de eventos o diseñador sobre cómo hacer realidad esta experiencia mágica y 100% personalizada para tu próxima celebración.</p>
+        </div>
+        <div id="final-sparkle" class="mt-8 mx-auto h-1 w-24 bg-yellow-400 rounded-full opacity-0 transition-all duration-1000"></div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // Scroll Animations with Intersection Observer
+            const targets = document.querySelectorAll('.anim-target');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Apply a general visibility class
+                        entry.target.classList.add('is-visible');
+
+                        // Clean up specific animation classes after transition
+                        entry.target.addEventListener('transitionend', () => {
+                            entry.target.classList.remove('fade-in-up', 'slide-in-left', 'slide-in-right');
+                        }, { once: true });
+                        
+                        // Stop observing the element
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            targets.forEach(target => {
+                observer.observe(target);
+            });
+            
+            // Final Sparkle Animation
+            const footer = document.querySelector('footer');
+            const sparkle = document.getElementById('final-sparkle');
+            const footerObserver = new IntersectionObserver((entries) => {
+                if(entries[0].isIntersecting) {
+                    setTimeout(() => {
+                         sparkle.style.opacity = '1';
+                         sparkle.style.transform = 'scaleX(1.5)';
+                    }, 500);
+                     setTimeout(() => {
+                         sparkle.style.opacity = '0';
+                         sparkle.style.transform = 'scaleX(0)';
+                    }, 1500);
+                }
+            }, { threshold: 0.5 });
+            footerObserver.observe(footer);
+
+
+            // Swiper Carousels Initialization
+            var swiperGaia = new Swiper('.swiper-gaia', {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                loop: true,
+                coverflowEffect: {
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                },
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+            });
+
+            var swiperVicente = new Swiper('.swiper-vicente', {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                loop: true,
+                coverflowEffect: {
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                },
+                 autoplay: {
+                    delay: 2800,
+                    disableOnInteraction: false,
+                },
+            });
+
+            // Particle Animation
+            const particleContainer = document.getElementById('particle-container');
+            const numParticles = 30;
+            for (let i = 0; i < numParticles; i++) {
+                let particle = document.createElement('div');
+                particle.classList.add('particle');
+                let size = Math.random() * 5 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                particleContainer.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+</html>
